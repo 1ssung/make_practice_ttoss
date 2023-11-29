@@ -18,6 +18,11 @@ class _SearchStockScreenState extends State<SearchStockScreen> {
 
   @override
   void initState() {
+    controller.addListener(() {
+      debugPrint(controller.text);
+
+
+    });
     Get.put(SearchStockData());
     super.initState();
   }
