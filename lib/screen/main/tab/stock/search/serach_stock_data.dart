@@ -1,6 +1,13 @@
 import 'package:fast_app_base/common/util/local_json.dart';
 import 'package:fast_app_base/screen/main/tab/stock/vo_simple_stock.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+abstract mixin class SearchStockDataProvider{
+  late final searchData = Get.find<SearchStockData>();
+
+}
+
 
 class SearchStockData extends GetxController {
   List<SimpleStock> stocks = [];
@@ -23,5 +30,14 @@ class SearchStockData extends GetxController {
     final jsonList =
         await LocalJson.getObjectList<SimpleStock>("stock_list.json");
     stocks.addAll(jsonList);
+  }
+
+  void search(String keyword){
+    if(keyword.isEmpty){
+      autoCompleteList.clear();
+      return;
+    }
+    autoCompleteList.value = stocks.where((element)=> element.stockName.contains(keyword)).toList();
+
   }
 }
