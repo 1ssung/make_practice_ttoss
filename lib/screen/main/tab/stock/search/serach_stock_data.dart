@@ -37,7 +37,11 @@ class SearchStockData extends GetxController {
       autoCompleteList.clear();
       return;
     }
-    autoCompleteList.value = stocks.where((element)=> element.stockName.contains(keyword)).toList();
+    autoCompleteList.value = stocks.where((element)=> element.name.contains(keyword)).toList();
 
+  }
+
+  void addHistory(SimpleStock stock) {
+    serchHistoryList.add(stock.name);
   }
 }
